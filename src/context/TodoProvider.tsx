@@ -26,6 +26,7 @@ export default function TodoProvider({
       id: Math.random().toString(),
       title,
       completed: false,
+      createdAt: new Date(),
     };
     await repo.addTodo(newTodo);
     setTodos((prev) => [...prev, newTodo]);
