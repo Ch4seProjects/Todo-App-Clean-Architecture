@@ -42,8 +42,22 @@ export default function TodoProvider({
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
+  const updateTodo = async (id: string, todo: Todo) => {
+    await repo.updateTodo(id, todo);
+    setTodos((prev) =>
+      prev.map((existingTodo) => {
+        if (existingTodo.id === id) {
+          return todo;
+        }
+        return existingTodo;
+      })
+    );
+  };
+
   return (
-    <TodoContext.Provider value={{ todos, addTodo, getTodos, deleteTodo }}>
+    <TodoContext.Provider
+      value={{ todos, addTodo, getTodos, deleteTodo, updateTodo }}
+    >
       {children}
     </TodoContext.Provider>
   );

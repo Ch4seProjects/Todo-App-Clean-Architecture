@@ -8,6 +8,7 @@ type TodoContextType = {
   addTodo: (title: string) => Promise<void>;
   getTodos: () => Promise<void>;
   deleteTodo: (id: string) => Promise<void>;
+  updateTodo: (id: string, todo: Todo) => Promise<void>;
 };
 
 const TodoContext = createContext<TodoContextType | undefined>(undefined);

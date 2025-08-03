@@ -15,4 +15,13 @@ export class TodoRepositoryImpl implements ITodoRepository {
   async deleteTodo(id: string): Promise<void> {
     this.todos = this.todos.filter((todo) => todo.id !== id);
   }
+
+  async updateTodo(id: string, todo: Todo): Promise<void> {
+    this.todos = this.todos.map((existingTodo) => {
+      if (existingTodo.id === id) {
+        return todo;
+      }
+      return existingTodo;
+    });
+  }
 }

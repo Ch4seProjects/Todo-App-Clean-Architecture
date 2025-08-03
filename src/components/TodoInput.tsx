@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useTodoContext } from "../context/TodoContext";
+import { handleKeyDown } from "../utils/onKeyDown";
 
 export default function TodoInput() {
   const [inputValue, setInputValue] = useState("");
@@ -9,10 +10,6 @@ export default function TodoInput() {
 
   const inputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") handleAddTodo();
   };
 
   const handleAddTodo = async () => {
@@ -30,7 +27,7 @@ export default function TodoInput() {
         placeholder="Add a task"
         className="w-full h-full rounded-full px-6 py-2 flex-1 focus:outline-none"
         onChange={inputOnChange}
-        onKeyDown={handleKeyDown}
+        onKeyDown={(e) => handleKeyDown(e, handleAddTodo)}
       />
       <button
         aria-label="Add Todo"
